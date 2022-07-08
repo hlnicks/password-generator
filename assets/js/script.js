@@ -8,12 +8,32 @@
 // once generated, password should be displayed in an alert or on page
 
 
-// prompts
-window.prompt("Select how long you wish your password to be. Must be between 7 - 127 characters.");
-window.confirm("Do you want your password to contain lowercase letters?");
-window.confirm("Do you want your password to contain uppercase letters?");
-window.confirm("Do you want your password to contain numbers?");
-window.confirm("Do you want your password to contain special characters?");
+function promptUser() {
+
+  // password length
+  var promptLength = window.prompt("Please enter desired password length. Choose a number between 7 - 129.");
+  promptLength = parseInt(promptLength);
+  if (promptLength < 8 || promptLength > 128){
+    window.alert("Invalid option. Please enter a number between 7 and 129.");
+    return promptUser();
+  }
+  if (isNaN(promptLength)) {
+    window.alert("Please select a numerical value.")
+    return promptUser();
+  }
+
+  // lowercase letters
+  var promptLower = window.confirm("Do you want your password to contain lowercase letters?");
+
+  // uppercase letters
+  var promptUpper = confirm("Do you want your password to contain uppercase letters?");
+
+  // numbers
+  var promptNumber = confirm("Do you want your password to contain numbers?");
+
+  // special characters
+  var promptSpecial = confirm("Do you want your password to contain special characters?");
+};
 
 
 
