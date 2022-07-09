@@ -4,11 +4,9 @@ var numbersArr= ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 var specialArr = ["~", "`", "!", "@", "#", "$","%","^", "&", "*", "(", ")", "-", "_", "+", "=", ";", ":", "'", '"', "<", ",", ".", ">", "?", "/", "[", "{", "]", "}"];
 
 
-
 function createPassword() {
-
   // password length
-  var promptLength = window.prompt("Please enter desired password length. Choose a number between 7 - 129.");
+  var promptLength = window.prompt("How long do you want your password to be? Choose a number between 7 - 129.");
   promptLength = parseInt(promptLength);
   if (promptLength < 8 || promptLength > 128 || isNaN(promptLength)){
     window.alert("Invalid option. Please enter a number between 7 and 129.");
@@ -18,54 +16,74 @@ function createPassword() {
 };
 
 
-// create separate functions??
-
-function userCriteria() {
+function passwordCriteria() {
   var promptLength = createPassword();
-  var inputArr = [];
+  var userInputArr = [];
 
   // lowercase letters
-  var promptLower = confirm("Do you want your password to contain lowercase letters?");
+  var promptLower = window.confirm("Do you want your password to contain lowercase letters?");
   if (promptLower) {
-     // if true, include lowercase letters
+    userInputArr = userInputArr.concat(lowerArr);
   };
 
 
   // uppercase letters
   var promptUpper = window.confirm("Do you want your password to contain uppercase letters?");
   if (promptUpper) {
-    // if true, include uppercase letters
+    userInputArr = userInputArr.concat(upperArr);
   };
-
 
   // numbers
   var promptNumber = window.confirm("Do you want your password to contain numbers?");
   if (promptNumber) {
-    // if true, include numbers
+    userInputArr = userInputArr.concat(numbersArr);
   };
 
 
   // special characters
   var promptSpecial = window.confirm("Do you want your password to contain special characters?");
   if (promptSpecial) {
-    // if true, include symbols
+    userInputArr = userInputArr.concat(specialArr);
   };
+
+
+  // if user didn't select any password criteria
+  if (userInputArr.length === 0) {
+    window.alert("You need to select at least one option. Please try again.")
+    return;
+  }
+  var finalOutcome = {promptLength, userInputArr}
+  return finalOutcome;
 };
 
 
-// v  FROM INITIAL FILES  v //
+// generates password based on user selected criteria
+function generatePassword() {
+  var finalPassword = [];
+  var userInput = passwordCriteria();
+  if (userInput === null) {
+    return;
+  }
+  for (var i = 0; i < userInput.promptLength; i++) {
+    var indexEachCharacter = Math.floor(Math.random()*userInput.userInputArr.length);
+    var passwordCharacters = userInput.userInputArr[indexEachCharacter];
+    finalPassword.push(passwordCharacters);
+  }
+  return finalPassword = finalPassword.join("");
+};
 
-// Get references to the #generate element
+
+// gets references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
+
+// writes password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
+};
 
-}
 
-// Add event listener to generate button
+// adds event listener to generate button
 generateBtn.addEventListener("click", writePassword);
