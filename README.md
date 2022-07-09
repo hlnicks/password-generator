@@ -12,8 +12,10 @@ The starter code was downloaded from an existing repository on GitHub.
 - [GitHub Repository](https://github.com/hlnicks/password-generator)
 - [GitHub Page](https://hlnicks.github.io/password-generator/)
 
-## Screenshot
-Screenshot inserted here
+## Screenshots
+![App Screenshot](./assets/images/screenshot1.png)
+&nbsp;
+![App Screenshot](./assets/images/screenshot2.png)
 
 ## Credits
 - [Original Repo](https://github.com/coding-boot-camp/friendly-parakeet)
